@@ -1,7 +1,7 @@
 """Seer Client implementation"""
 import grpc
-import seer_pb2
-import seer_pb2_grpc
+import seer.seer_pb2 as seer_pb2
+import seer.seer_pb2_grpc as seer_pb2_grpc
 
 
 class Client:

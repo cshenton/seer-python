@@ -37,3 +37,13 @@ we generate client stubs with:
 # Generates seer_pb2.py and seer_pb2_grpc.py
 python -m grpc_tools.protoc -I ../seer/seer --python_out=./seer --grpc_python_out=./seer ../seer/seer/seer.proto
 ```
+
+Then, because the grpc devs don't care about python 3, we need to change.
+```python
+# in seer_pb2_grpc.py
+# From this
+import seer_pb2 as seer__pb2
+
+# To this
+from . import seer_pb2 as seer__pb2
+```

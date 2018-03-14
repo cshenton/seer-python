@@ -2,7 +2,7 @@
 import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-import seer_pb2 as seer__pb2
+from . import seer_pb2 as seer__pb2
 
 
 class SeerStub(object):
