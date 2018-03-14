@@ -23,5 +23,7 @@ before_install:
   - docker ps -a
 
 script:
-  - python -m pytest tests/
+  - python -m pytest tests/ --cov seer --cov-report term-missing
+
+after_success:
   - coveralls
