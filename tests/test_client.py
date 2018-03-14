@@ -2,6 +2,8 @@
 
 These are light, because exceptions, arg parsing happen serverside.
 """
+import random
+import string
 import unittest
 
 import seer
@@ -10,8 +12,12 @@ import seer
 class TestClient(unittest.TestCase):
 
     def setUp(self):
+        self.name = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
         self.client = seer.Client("127.0.0.1:8080")
-        self.client.create_stream("test", 86400)
+        self.client.create_stream(self.name, 86400)
+
+    def tearDown(self):
+        self.client.delete_stream(self.name)
 
     def test_create_stream(self):
         name = "myStream"
@@ -21,14 +27,14 @@ class TestClient(unittest.TestCase):
         self.assertEqual(stream.period, period)
 
     def test_get_stream(self):
-        stream = self.client.get_stream("test")
-        self.assertEqual(stream.name, "test")
+        stream = self.client.get_stream(self.name)
+        self.assertEqual(stream.name, self.name)
         self.assertEqual(stream.period, 86400)
 
     def test_list_streams(self):
         streams = self.client.list_streams(10, 1)
         self.assertEqual(len(streams), 1)
-        self.assertEqual(streams[0].name, "test")
+        self.assertEqual(streams[0].name, self.name)
 
     def test_update_stream(self):
         times = [
@@ -37,13 +43,13 @@ class TestClient(unittest.TestCase):
             datetime.datetime(2016, 1, 3),
         ]
         values = [10, 9, 8]
-        stream = self.client.update_stream("test", times, values)
-        self.assertEqual(stream.name, "test")
+        stream = self.client.update_stream(self.name, times, values)
+        self.assertEqual(stream.name, self.name)
         self.assertEqual(stream.period, 86400)
         self.assertEqual(stream.last_event_time.ToDatetime(), datetime.datetime(2016, 1, 3))
 
     def test_get_forecast(self):
-        forecast = self.client.get_forecast("test", 100)
+        forecast = self.client.get_forecast(self.name, 100)
         self.assertEqual(len(forecast.times), 100)
         self.assertEqual(len(forecast.values), 100)
         self.assertEqual(len(forecast.intervals[0].lower_bound), 100)
