@@ -1,8 +1,13 @@
 # Seer Python Client
 [![Build Status](https://travis-ci.org/cshenton/seer-python.svg?branch=master)](https://travis-ci.org/cshenton/seer-python)
-[![Python Version](https://img.shields.io/pypi/pyversions/Django.svg)]()
+[![Python Version](https://img.shields.io/pypi/pyversions/seer.svg)](https://pypi.org/project/seer/)
 
 The python client for the seer forecasting server.
+
+
+## Installation
+
+The seer python client is available on PyPi, so just `pip install seer` to get the latest release.
 
 
 ## Usage
