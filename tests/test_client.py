@@ -21,7 +21,7 @@ class TestClient(unittest.TestCase):
         self.client.delete_stream(self.name)
 
     def test_create_stream(self):
-        name = "myStream"
+        name = self.name + "_new"
         period = 3600
         stream = self.client.create_stream(name, period)
         self.assertEqual(stream.name, name)
@@ -34,8 +34,8 @@ class TestClient(unittest.TestCase):
 
     def test_list_streams(self):
         streams = self.client.list_streams(10, 1)
-        self.assertEqual(len(streams), 1)
-        names = [s.name for s in stream]
+        self.assertTrue(len(streams) <= 10)
+        names = [s.name for s in streams]
         self.assertTrue(self.name in names)
 
     def test_update_stream(self):

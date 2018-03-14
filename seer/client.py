@@ -95,9 +95,9 @@ class Client(object):
             name=name,
             event=seer_pb2.Event(),
         )
-        req.event.extend(values)
+        req.event.values.extend(values)
         for t in times:
-            req.times.add().FromDateTime(t)
+            req.event.times.add().FromDatetime(t)
 
         stream = self.stub.UpdateStream(req)
         return stream
