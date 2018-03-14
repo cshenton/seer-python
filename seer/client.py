@@ -22,17 +22,6 @@ class Client:
         self.stub = seer_pb2_grpc.SeerStub()
         self.address = address
 
-    def get_stream(self, name):
-        """Gets the stream from the server with the given name.
-
-        Args:
-            name (string): The unique name of the stream.
-
-        Returns:
-            Stream: The requested stream.
-        """
-        pass
-
     def create_stream(self, name, period):
         """Creates a new stream with the given name and periodicity.
 
@@ -45,6 +34,17 @@ class Client:
         """
         pass
 
+    def get_stream(self, name):
+        """Gets the stream from the server with the given name.
+
+        Args:
+            name (string): The unique name of the stream.
+
+        Returns:
+            Stream: The requested stream.
+        """
+        pass
+
     def list_streams(self, page_num, page_size):
         """Gets a list of streams from the server.
 
@@ -54,5 +54,30 @@ class Client:
 
         Returns:
             List of Streams: The retrieved streams.
+        """
+        pass
+
+    def update_stream(self, name, times, values):
+        """Updates the specified stream with the newly observed data.
+
+        Args:
+            name (string): The name of the stream to update.
+            times (list of datetime): The times at which new vaues were observed.
+            values (list of floats): The newly observed values.
+
+        Returns:
+            Stream: The updated stream.
+        """
+        pass
+
+    def get_forecast(self, name, length):
+        """Generates a forecast from the specified stream.
+
+        Args:
+            name (string): The name of the stream to forecast from.
+            length (int): The number of periods to forecast ahead.
+
+        Returns:
+            Forecast: The generated forecast.
         """
         pass

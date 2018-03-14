@@ -15,11 +15,11 @@ forecast_length = 100
 
 # Connect to the server and create a stream
 client = seer.Client("localhost:8080")
-stream = client.create_stream(name, period)
+client.create_stream(name, period)
 
 # Feed in most of the data, generate a forecast
-stream.update(name, values, times)
-f = stream.forecast(forecast_length)
+client.update_stream(name, times, values)
+f = client.get_forecast(name, forecast_length)
 
 # Graph the forecast against the true result
 def graph(times, values, forecast):
