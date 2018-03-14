@@ -15,9 +15,13 @@ services:
   - docker
 
 before_install:
+  # Install package deps
+  - pip install -r requirements.txt
+  # Intall test deps
+  - pip install pytest
   # Client is tested against a real copy of the server
   - docker pull cshenton/seer
-  - docker run -d -p 127.0.0.1:8080:8080
+  - docker run -d -p 127.0.0.1:8080:8080 cshenton/seer
   - docker ps -a
 
 script:
