@@ -1,4 +1,7 @@
 # Seer Python Client
+[![Build Status](https://travis-ci.org/cshenton/seer-python.svg?branch=master)](https://travis-ci.org/cshenton/seer-python)
+[![Python Version](https://img.shields.io/pypi/pyversions/Django.svg)]()
+
 The python client for the seer forecasting server.
 
 
