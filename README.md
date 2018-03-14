@@ -1,21 +1,30 @@
 # Seer Python Client
 [![Build Status](https://travis-ci.org/cshenton/seer-python.svg?branch=master)](https://travis-ci.org/cshenton/seer-python)
 [![Python Version](https://img.shields.io/pypi/pyversions/seer.svg)](https://pypi.org/project/seer/)
+[![Coverage Status](https://coveralls.io/repos/github/cshenton/seer-python/badge.svg?branch=master)](https://coveralls.io/github/cshenton/seer-python?branch=master)
 
 The python client for the seer forecasting server.
 
 
 ## Installation
 
-The seer python client is available on PyPi, so just `pip install seer` to get the latest release.
+The seer python client is available on PyPi, so just:
+
+```bash
+pip install seer
+
+```
+to get the latest release.
 
 
 ## Usage
 
-If you don't have a running instance of seer, then run the docker image:
+Since this is a client library, you'll need a server to communicate with. To get
+up and running just:
 ```bash
 docker run -d -p 8080:8080 cshenton/seer
 ```
+Check out the project repo over [here](https://github.com/cshenton/seer)
 
 Then, to interact over localhost
 ```python
