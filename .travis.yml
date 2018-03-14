@@ -16,6 +16,7 @@ before_install:
   - pip install -r requirements.txt
   # Intall test deps
   - pip install pytest
+  - pip install coverage
   - pip install coveralls
   # Client is tested against a real copy of the server
   - docker pull cshenton/seer
@@ -23,7 +24,7 @@ before_install:
   - docker ps -a
 
 script:
-  - python -m pytest tests/ --cov seer --cov-report term-missing
+  - coverage run --source seer -m pytest tests/
 
 after_success:
   - coveralls
