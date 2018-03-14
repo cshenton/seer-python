@@ -19,7 +19,7 @@ class Client:
             address (string): The address of the server to connect to.
         """
         chan = grpc.insecure_channel(address)
-        self.stub = seer_pb2_grpc.SeerStub()
+        self.stub = seer_pb2_grpc.SeerStub(chan)
         self.address = address
 
     def create_stream(self, name, period):
@@ -32,7 +32,14 @@ class Client:
         Returns:
             Stream: The newly created stream.
         """
-        pass
+        req = seer_pb2.CreateStreamRequest(
+            stream=seer_pb2.Stream(
+                name=name,
+                period=period,
+            )
+        )
+        stream = self.stub.CreateStream(req)
+        return stream
 
     def get_stream(self, name):
         """Gets the stream from the server with the given name.
@@ -43,9 +50,11 @@ class Client:
         Returns:
             Stream: The requested stream.
         """
-        pass
+        req = seer_pb2.GetStreamRequest(name=name)
+        stream = self.stub.GetStream(req)
+        return stream
 
-    def list_streams(self, page_num, page_size):
+    def list_streams(self, page_size, page_number):
         """Gets a list of streams from the server.
 
         Args:
@@ -55,7 +64,12 @@ class Client:
         Returns:
             List of Streams: The retrieved streams.
         """
-        pass
+        req = seer_pb2.ListStreamsRequest(
+            page_size=page_size,
+            page_number=page_number,
+        )
+        resp = self.stub.ListStreams(req)
+        return resp.streams
 
     def update_stream(self, name, times, values):
         """Updates the specified stream with the newly observed data.
@@ -68,7 +82,15 @@ class Client:
         Returns:
             Stream: The updated stream.
         """
-        pass
+        req = seer_pb2.UpdateStreamRequest(
+            name=name,
+            event=seer_pb2.Event(
+                times=times,
+                values=values,
+            ),
+        )
+        stream = self.stub.UpdateStream(req)
+        return stream
 
     def get_forecast(self, name, length):
         """Generates a forecast from the specified stream.
@@ -80,4 +102,9 @@ class Client:
         Returns:
             Forecast: The generated forecast.
         """
-        pass
+        req = seer_pb2.GetForecastRequest(
+            name=name,
+            n=length,
+        )
+        forecast = self.stub.GetForecast(req)
+        return forecast
