@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-from distutils.core import setup
+from setuptools import setup
 
 with open("README.md", 'r') as f:
     long_description = f.read()
 
 setup(
     name='seer',
-    version='0.1',
+    version='0.1.1',
     description='Python client for cshenton/seer',
     long_description=long_description,
     platforms='MacOS X, Windows, Linux',
@@ -22,7 +22,7 @@ setup(
     ],
     license='Apache 2.0',
     packages=['seer'],
-    categories=[
+    classifiers=[
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'License :: OSI Approved :: Apache Software License',
