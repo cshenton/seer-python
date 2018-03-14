@@ -37,7 +37,7 @@ def graph(times, values, forecast):
 graph(times, values, f)
 ```
 
-## Generating gRPC stubs
+## (For Contributors) Generating gRPC stubs
 
 Assuming this repo is stored in `cshenton/seer-python`, next to `cshenton/seer`,
 we generate client stubs with:
@@ -47,7 +47,7 @@ we generate client stubs with:
 python -m grpc_tools.protoc -I ../seer/seer --python_out=./seer --grpc_python_out=./seer ../seer/seer/seer.proto
 ```
 
-Then, because the grpc devs don't care about python 3, we need to change.
+Then, because the grpc devs don't care about python 3, we need to fix the relative imports.
 ```python
 # in seer_pb2_grpc.py
 # From this

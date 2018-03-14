@@ -1,0 +1,24 @@
+language: python
+
+python:
+  - "2.6"
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.5-dev"
+  - "3.6"
+  - "3.6-dev"
+  - "3.7-dev"
+
+services:
+  - docker
+
+before_install:
+  # Client is tested against a real copy of the server
+  - docker pull cshenton/seer
+  - docker run -d -p 127.0.0.1:8080:8080
+  - docker ps -a
+
+script:
+  - python -m pytest tests/
