@@ -1,12 +1,21 @@
 # Seer Python Client
 The python client for the seer forecasting server.
 
+
 ## Usage
+
+If you don't have a running instance of seer, then run the docker image:
+```bash
+docker run -d -p 8080:8080 cshenton/seer
+```
+
+Then, to interact over localhost
 ```python
 import datetime
 import seer
 
 # Input data, parameters
+host = "localhost:8080"
 name = "myStream"
 period = 3600
 times = [...]
@@ -14,7 +23,7 @@ values = [...]
 forecast_length = 100
 
 # Connect to the server and create a stream
-client = seer.Client("localhost:8080")
+client = seer.Client(host)
 client.create_stream(name, period)
 
 # Feed in most of the data, generate a forecast
