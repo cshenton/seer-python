@@ -73,3 +73,7 @@ import seer_pb2 as seer__pb2
 # To this
 from . import seer_pb2 as seer__pb2
 ```
+
+I also manually remove `SeerServicer` and `add_SeerServicer_to_server`. protoc
+doesn't provide an option to just generate client stubs, and I want test
+coverage numbers to be correct.
