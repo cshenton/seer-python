@@ -71,6 +71,15 @@ class Client(object):
         resp = self.stub.ListStreams(req)
         return resp.streams
 
+    def delete_stream(self, name):
+        """Deletes the stream with the specified name.
+
+        Args:
+            name (string): The name of the stream to delete.
+        """
+        req = seer_pb2.DeleteStreamRequest(name=name)
+        self.stub.DeleteStream(req)
+
     def update_stream(self, name, times, values):
         """Updates the specified stream with the newly observed data.
 
@@ -84,11 +93,12 @@ class Client(object):
         """
         req = seer_pb2.UpdateStreamRequest(
             name=name,
-            event=seer_pb2.Event(
-                times=times,
-                values=values,
-            ),
+            event=seer_pb2.Event(),
         )
+        req.event.values.extend(values)
+        for t in times:
+            req.event.times.add().FromDatetime(t)
+
         stream = self.stub.UpdateStream(req)
         return stream
 
