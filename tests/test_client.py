@@ -2,6 +2,7 @@
 
 These are light, because exceptions, arg parsing happen serverside.
 """
+import datetime
 import random
 import string
 import unittest
@@ -34,7 +35,8 @@ class TestClient(unittest.TestCase):
     def test_list_streams(self):
         streams = self.client.list_streams(10, 1)
         self.assertEqual(len(streams), 1)
-        self.assertEqual(streams[0].name, self.name)
+        names = [s.name for s in stream]
+        self.assertTrue(self.name in names)
 
     def test_update_stream(self):
         times = [
