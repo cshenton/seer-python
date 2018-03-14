@@ -31,27 +31,32 @@ Then, to interact over localhost
 import datetime
 import seer
 
-# Input data, parameters
-host = "localhost:8080"
-name = "myStream"
-period = 3600
-times = [...]
-values = [...]
-forecast_length = 100
 
-# Connect to the server and create a stream
-client = seer.Client(host)
-client.create_stream(name, period)
+HOST = "localhost:8080"
 
-# Feed in most of the data, generate a forecast
-client.update_stream(name, times, values)
-f = client.get_forecast(name, forecast_length)
-
-# Graph the forecast against the true result
 def graph(times, values, forecast):
     pass
 
-graph(times, values, f)
+def main():
+    name = "myStream"
+    period = 3600
+    times = [...]
+    values = [...]
+    forecast_length = 100
+
+    # Connect to the server and create a stream
+    client = seer.Client(HOST)
+    client.create_stream(name, period)
+
+    # Feed in most of the data, generate a forecast
+    client.update_stream(name, times, values)
+    f = client.get_forecast(name, forecast_length)
+
+    # Graph the forecast against the true result
+    graph(times, values, f)
+
+if __name__ == '__main__':
+    main()
 ```
 
 ## (For Contributors) Generating gRPC stubs
