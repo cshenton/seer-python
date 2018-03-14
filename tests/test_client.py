@@ -31,12 +31,16 @@ class TestClient(unittest.TestCase):
         self.assertEqual(streams[0].name, "test")
 
     def test_update_stream(self):
-        times = []
-        values = []
+        times = [
+            datetime.datetime(2016, 1, 1),
+            datetime.datetime(2016, 1, 2),
+            datetime.datetime(2016, 1, 3),
+        ]
+        values = [10, 9, 8]
         stream = self.client.update_stream("test", times, values)
         self.assertEqual(stream.name, "test")
         self.assertEqual(stream.period, 86400)
-        self.assertEqual(stream.last_event_time, "")
+        self.assertEqual(stream.last_event_time.ToDatetime(), datetime.datetime(2016, 1, 3))
 
     def test_get_forecast(self):
         forecast = self.client.get_forecast("test", 100)

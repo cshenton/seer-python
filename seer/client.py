@@ -84,11 +84,12 @@ class Client(object):
         """
         req = seer_pb2.UpdateStreamRequest(
             name=name,
-            event=seer_pb2.Event(
-                times=times,
-                values=values,
-            ),
+            event=seer_pb2.Event(),
         )
+        req.event.extend(values)
+        for t in times:
+            req.times.add().FromDateTime(t)
+
         stream = self.stub.UpdateStream(req)
         return stream
 
