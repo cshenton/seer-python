@@ -16,6 +16,7 @@ before_install:
   - pip install -r requirements.txt
   # Intall test deps
   - pip install pytest
+  - pip install coveralls
   # Client is tested against a real copy of the server
   - docker pull cshenton/seer
   - docker run -d -p 127.0.0.1:8080:8080 cshenton/seer
@@ -23,3 +24,4 @@ before_install:
 
 script:
   - python -m pytest tests/
+  - coveralls
